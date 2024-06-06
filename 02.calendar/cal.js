@@ -9,23 +9,23 @@ const currentDate = luxon.DateTime.now();
 const year = args.y ?? currentDate.year;
 const month = args.m ?? currentDate.month;
 
-const firstDay = luxon.DateTime.local(year, month, 1);
-const lastDay = firstDay.endOf("month");
+const firstDate = luxon.DateTime.local(year, month, 1);
+const lastDate = firstDate.endOf("month");
 
 let calendar = `\
-      ${firstDay.month}月 ${firstDay.year}
+      ${firstDate.month}月 ${firstDate.year}
 日 月 火 水 木 金 土
 `;
 
-calendar += "   ".repeat(firstDay.weekday % 7);
+calendar += "   ".repeat(firstDate.weekday % 7);
 
-for (let day = 1; day <= lastDay.day; day++) {
+for (let day = 1; day <= lastDate.day; day++) {
   calendar += day.toString().padStart(2, " ") + " ";
-  if ((day + firstDay.weekday) % 7 === 0 && day !== lastDay.day) {
+  if ((day + firstDate.weekday) % 7 === 0 && day !== lastDate.day) {
     calendar += "\n";
   }
 }
 
-calendar += lastDay.weekday === 7 ? "\n" : "\n\n";
+calendar += lastDate.weekday === 7 ? "\n" : "\n\n";
 
 process.stdout.write(calendar);
