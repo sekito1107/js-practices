@@ -11,11 +11,13 @@ const month = args.m ?? currentDate.month;
 
 const firstDay = luxon.DateTime.local(year, month, 1)
 const lastDay = firstDay.endOf("month");
-const firstDayWeekday = firstDay.weekday;
 
-let calendar = `      ${firstDay.month}月 ${firstDay.year}\n日 月 火 水 木 金 土\n`;
+let calendar = `\
+      ${firstDay.month}月 ${firstDay.year}
+日 月 火 水 木 金 土
+`;
 
-if (firstDayWeekday !== 7) {
+if (firstDay.weekday !== 7) {
   calendar += "   ".repeat(firstDay.weekday);
 }
 
