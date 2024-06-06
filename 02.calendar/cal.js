@@ -4,12 +4,12 @@ import * as luxon from "luxon";
 import minimist from "minimist";
 
 const args = minimist(process.argv.slice(2));
-const currentDate = luxon.DateTime.now()
+const currentDate = luxon.DateTime.now();
 
-const year = args.y ?? currentDate.year
+const year = args.y ?? currentDate.year;
 const month = args.m ?? currentDate.month;
 
-const firstDay = luxon.DateTime.local(year, month, 1)
+const firstDay = luxon.DateTime.local(year, month, 1);
 const lastDay = firstDay.endOf("month");
 
 let calendar = `\
@@ -17,9 +17,7 @@ let calendar = `\
 日 月 火 水 木 金 土
 `;
 
-if (firstDay.weekday !== 7) {
-  calendar += "   ".repeat(firstDay.weekday);
-}
+calendar += "   ".repeat(firstDay.weekday % 7);
 
 for (let day = 1; day <= lastDay.day; day++) {
   calendar += day.toString().padStart(2, " ") + " ";
