@@ -19,12 +19,12 @@ let calendar = `\
 
 calendar += "   ".repeat(firstDate.weekday % 7);
 
-for (let dayOfMonth = 1; dayOfMonth <= lastDate.day; dayOfMonth++) {
-  calendar += dayOfMonth.toString().padStart(2, " ");
-  if (dayOfMonth === lastDate.day) {
+for (let i = 1; i <= lastDate.day; i++) {
+  calendar += i.toString().padStart(2, " ");
+  if (i === lastDate.day) {
     break;
   }
-  if ((dayOfMonth + firstDate.weekday) % 7 === 0) {
+  if ((i + firstDate.weekday) % 7 === 0) {
     calendar += "\n";
   } else {
     calendar += " ";
