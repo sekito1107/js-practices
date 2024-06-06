@@ -3,12 +3,11 @@
 import * as luxon from "luxon";
 import minimist from "minimist";
 
-console.log(luxon.DateTime.local());
-
 const args = minimist(process.argv.slice(2));
+const currentDate = luxon.DateTime.now()
 
-const year = args.y ?? luxon.DateTime.local().year;
-const month = args.m ?? luxon.DateTime.local().month;
+const year = args.y ?? currentDate.year
+const month = args.m ?? currentDate.month;
 
 const firstDay = luxon.DateTime.fromObject({ year, month, day: 1 });
 const lastDay = firstDay.endOf("month");
