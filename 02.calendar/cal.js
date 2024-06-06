@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 
-import { DateTime } from "luxon";
+import * as luxon from "luxon";
 import minimist from "minimist";
+
+console.log(luxon.DateTime.local());
 
 const args = minimist(process.argv.slice(2));
 
-const year = args.y ?? DateTime.local().year;
-const month = args.m ?? DateTime.local().month;
+const year = args.y ?? luxon.DateTime.local().year;
+const month = args.m ?? luxon.DateTime.local().month;
 
-const firstDay = DateTime.fromObject({ year, month, day: 1 });
+const firstDay = luxon.DateTime.fromObject({ year, month, day: 1 });
 const lastDay = firstDay.endOf("month");
 const firstDayWeekday = firstDay.weekday;
 
