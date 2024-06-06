@@ -20,12 +20,10 @@ ${"   ".repeat(firstDateOfMonth.weekday % 7)}`;
 for (let i = 1; i <= lastDateOfMonth.day; i++) {
   calendar += i.toString().padStart(2, " ");
   if (i === lastDateOfMonth.day) {
-    calendar += "\n";
+    calendar += lastDateOfMonth.weekday === 7 ? "\n" : "\n\n";
   } else {
     calendar += (i + firstDateOfMonth.weekday) % 7 === 0 ? "\n" : " ";
   }
 }
-
-calendar += lastDateOfMonth.weekday === 7 ? "\n" : "\n\n";
 
 process.stdout.write(calendar);
