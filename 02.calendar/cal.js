@@ -16,12 +16,12 @@ const firstDayWeekday = firstDay.weekday;
 let calendar = `      ${firstDay.month}月 ${firstDay.year}\n日 月 火 水 木 金 土\n`;
 
 if (firstDayWeekday !== 7) {
-  calendar += "   ".repeat(firstDayWeekday);
+  calendar += "   ".repeat(firstDay.weekday);
 }
 
 for (let day = 1; day <= lastDay.day; day++) {
   calendar += day.toString().padStart(2, " ") + " ";
-  if ((day + firstDayWeekday) % 7 === 0 && day !== lastDay.day) {
+  if ((day + firstDay.weekday) % 7 === 0 && day !== lastDay.day) {
     calendar += "\n";
   }
 }
