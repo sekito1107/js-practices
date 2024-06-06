@@ -17,7 +17,6 @@ let calendar = `\
 日 月 火 水 木 金 土
 ${"   ".repeat(firstDateOfMonth.weekday % 7)}`;
 
-
 for (let i = 1; i <= lastDateOfMonth.day; i++) {
   calendar += i.toString().padStart(2, " ");
   if (i === lastDateOfMonth.day) {
