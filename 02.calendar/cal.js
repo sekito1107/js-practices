@@ -9,7 +9,7 @@ const currentDate = luxon.DateTime.now()
 const year = args.y ?? currentDate.year
 const month = args.m ?? currentDate.month;
 
-const firstDay = luxon.DateTime.fromObject({ year, month, day: 1 });
+const firstDay = luxon.DateTime.local(year, month, 1)
 const lastDay = firstDay.endOf("month");
 const firstDayWeekday = firstDay.weekday;
 
