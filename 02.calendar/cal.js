@@ -19,10 +19,15 @@ let calendar = `\
 
 calendar += "   ".repeat(firstDate.weekday % 7);
 
-for (let day = 1; day <= lastDate.day; day++) {
-  calendar += day.toString().padStart(2, " ") + " ";
-  if ((day + firstDate.weekday) % 7 === 0 && day !== lastDate.day) {
+for (let dayOfMonth = 1; dayOfMonth <= lastDate.day; dayOfMonth++) {
+  calendar += dayOfMonth.toString().padStart(2, " ");
+  if (dayOfMonth === lastDate.day) {
+    break;
+  }
+  if ((dayOfMonth + firstDate.weekday) % 7 === 0) {
     calendar += "\n";
+  } else {
+    calendar += " ";
   }
 }
 
