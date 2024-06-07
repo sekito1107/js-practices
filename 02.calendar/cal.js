@@ -4,26 +4,33 @@ import * as luxon from "luxon";
 import minimist from "minimist";
 
 const args = minimist(process.argv.slice(2));
-const currentDate = luxon.DateTime.now();
+const currentDateTime = luxon.DateTime.now();
 
-const year = args.y ?? currentDate.year;
-const month = args.m ?? currentDate.month;
+const year = args.y ?? currentDateTime.year;
+const month = args.m ?? currentDateTime.month;
 
-const firstDateOfMonth = luxon.DateTime.local(year, month, 1);
-const lastDateOfMonth = firstDateOfMonth.endOf("month");
+const firstDateTimeOfMonth = luxon.DateTime.local(year, month, 1);
+const lastDateTimeOfMonth = firstDateTimeOfMonth.endOf("month");
 
-let calendar = `\
-      ${firstDateOfMonth.month}月 ${firstDateOfMonth.year}
-日 月 火 水 木 金 土
-${"   ".repeat(firstDateOfMonth.weekday % 7)}`;
+console.log(
+  `      ${firstDateTimeOfMonth.month}月 ${firstDateTimeOfMonth.year}`,
+);
+console.log("日 月 火 水 木 金 土");
+process.stdout.write("   ".repeat(firstDateTimeOfMonth.weekday % 7));
 
-for (let i = 1; i <= lastDateOfMonth.day; i++) {
-  calendar += i.toString().padStart(2, " ");
-  if (i === lastDateOfMonth.day) {
-    calendar += lastDateOfMonth.weekday === 7 ? "\n" : "\n\n";
-  } else {
-    calendar += (i + firstDateOfMonth.weekday) % 7 === 0 ? "\n" : " ";
-  }
+for (
+  let dateTime = firstDateTimeOfMonth;
+  dateTime <= lastDateTimeOfMonth;
+  dateTime = dateTime.plus({ days: 1 })
+) {
+  process.stdout.write(String(dateTime.day).padStart(2, " "));
+  process.stdout.write(
+    dateTime.weekday === 6 || dateTime.day === dateTime.daysInMonth
+      ? "\n"
+      : " ",
+  );
 }
 
-process.stdout.write(calendar);
+if (lastDateTimeOfMonth.weekday !== 7) {
+  console.log("");
+}
