@@ -28,5 +28,5 @@ for (
 }
 
 if (endOfMonth.weekday !== 7) {
-  console.log;
+  console.log();
 }
