@@ -12,9 +12,7 @@ const month = args.m ?? now.month;
 const beginOfMonth = luxon.DateTime.local(year, month, 1);
 const endOfMonth = beginOfMonth.endOf("month");
 
-console.log(
-  `      ${beginOfMonth.month}月 ${beginOfMonth.year}`,
-);
+console.log(`      ${beginOfMonth.month}月 ${beginOfMonth.year}`);
 console.log("日 月 火 水 木 金 土");
 process.stdout.write("   ".repeat(beginOfMonth.weekday % 7));
 
@@ -25,13 +23,10 @@ for (
 ) {
   process.stdout.write(String(dateTime.day).padStart(2, " "));
   process.stdout.write(
-    dateTime.weekday === 6 || dateTime.day === endOfMonth.day
-      ? "\n"
-      : " ",
+    dateTime.weekday === 6 || dateTime.day === endOfMonth.day ? "\n" : " ",
   );
 }
 
 if (endOfMonth.weekday !== 7) {
   console.log;
 }
-
