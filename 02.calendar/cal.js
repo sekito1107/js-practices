@@ -25,7 +25,7 @@ for (
 ) {
   process.stdout.write(String(dateTime.day).padStart(2, " "));
   process.stdout.write(
-    dateTime.weekday === 6 || dateTime.day === dateTime.daysInMonth
+    dateTime.weekday === 6 || dateTime.day === lastDateTimeOfMonth.day
       ? "\n"
       : " ",
   );
@@ -34,3 +34,4 @@ for (
 if (lastDateTimeOfMonth.weekday !== 7) {
   console.log;
 }
+
