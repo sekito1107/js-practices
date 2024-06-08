@@ -32,5 +32,5 @@ for (
 }
 
 if (lastDateTimeOfMonth.weekday !== 7) {
-  console.log("");
+  console.log;
 }
