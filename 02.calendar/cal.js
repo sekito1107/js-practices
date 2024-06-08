@@ -17,13 +17,13 @@ console.log("日 月 火 水 木 金 土");
 process.stdout.write("   ".repeat(beginOfMonth.weekday % 7));
 
 for (
-  let dateTime = beginOfMonth;
-  dateTime <= endOfMonth;
-  dateTime = dateTime.plus({ days: 1 })
+  let current = beginOfMonth;
+  current <= endOfMonth;
+  current = current.plus({ days: 1 })
 ) {
-  process.stdout.write(String(dateTime.day).padStart(2, " "));
+  process.stdout.write(String(current.day).padStart(2, " "));
   process.stdout.write(
-    dateTime.weekday === 6 || dateTime.day === endOfMonth.day ? "\n" : " ",
+    current.weekday === 6 || current.day === endOfMonth.day ? "\n" : " ",
   );
 }
 
