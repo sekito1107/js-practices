@@ -31,18 +31,10 @@ run(
 )
   .then(() => run(db, "INSERT INTO books (price) VALUES (?)", 2980))
   .catch((err) => {
-    if (err.code === "SQLITE_ERROR") {
-      console.error(err.message);
-    } else {
-      throw err;
-    }
+    console.error(err.message);
     return get(db, "SELECT price FROM books");
   })
   .catch((err) => {
-    if (err.code === "SQLITE_ERROR") {
-      console.error(err.message);
-    } else {
-      throw err;
-    }
+    console.error(err.message);
     return run(db, "DROP TABLE books");
   });
