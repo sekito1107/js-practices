@@ -28,7 +28,7 @@ await run(
 try {
   await run(db, "INSERT INTO books (price) VALUES (?)", 2980);
 } catch (err) {
-  if (err.code === "SQLITE_ERROR") {
+  if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
   } else {
     throw err;
@@ -38,7 +38,7 @@ try {
 try {
   await get(db, "SELECT price FROM books");
 } catch (err) {
-  if (err.code === "SQLITE_ERROR") {
+  if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
   } else {
     throw err;
