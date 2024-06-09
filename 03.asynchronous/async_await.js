@@ -45,4 +45,4 @@ try {
   }
 }
 
-await run(db, "DROP TABLE books");
+run(db, "DROP TABLE books");
