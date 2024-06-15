@@ -1,32 +1,36 @@
 #!/usr/bin/env node
 
 import sqlite3 from "sqlite3";
-import { run, get } from "./sqlite_functions.js";
+import * as sqliteFunctions from "./sqlite_functions.js";
 
 const db = new sqlite3.Database(":memory:");
 
 // エラー無し
-await run(
+await sqliteFunctions.run(
   db,
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 );
 
-const result = await run(db, "INSERT INTO books (title) VALUES (?)", "sample");
+const result = await sqliteFunctions.run(
+  db,
+  "INSERT INTO books (title) VALUES (?)",
+  "sample",
+);
 console.log(`id: ${result.lastID}`);
 
-const row = await get(db, "SELECT * FROM books");
+const row = await sqliteFunctions.get(db, "SELECT * FROM books");
 console.log(row);
 
-await run(db, "DROP TABLE books");
+await sqliteFunctions.run(db, "DROP TABLE books");
 
 // エラー有り
-await run(
+await sqliteFunctions.run(
   db,
   "CREATE TABLE books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL UNIQUE)",
 );
 
 try {
-  await run(db, "INSERT INTO books (price) VALUES (?)", 2980);
+  await sqliteFunctions.run(db, "INSERT INTO books (price) VALUES (?)", 2980);
 } catch (err) {
   if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
@@ -36,7 +40,7 @@ try {
 }
 
 try {
-  await get(db, "SELECT price FROM books");
+  await sqliteFunctions.get(db, "SELECT price FROM books");
 } catch (err) {
   if (err instanceof Error && err.code === "SQLITE_ERROR") {
     console.error(err.message);
@@ -45,4 +49,4 @@ try {
   }
 }
 
-run(db, "DROP TABLE books");
+sqliteFunctions.run(db, "DROP TABLE books");
