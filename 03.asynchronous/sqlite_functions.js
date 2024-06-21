@@ -22,4 +22,4 @@ const get = (db, sql, params = []) => {
   });
 };
 
-export { run, get };
+export default { run, get };
