@@ -36,7 +36,7 @@ export default class App {
   async #showList() {
     const memos = await this.db.getAll();
     memos.forEach((memo) => {
-      const firstLineLength = this.#getFirstLine(memo.content);
+      const firstLineLength = this.#getFirstLineLength(memo.content);
       console.log(memo.content.substring(0, firstLineLength));
     });
   }
@@ -57,9 +57,9 @@ export default class App {
   async #getTargetMemoId(message) {
     const memos = await this.db.getAll();
     const choices = memos.map((memo) => {
-      const firstLine = this.#getFirstLine(memo.content);
+      const firstLineLength = this.#getFirstLineLength(memo.content);
       return {
-        name: memo.content.substring(0, firstLine),
+        name: memo.content.substring(0, firstLineLength),
         value: memo.id,
       };
     });
@@ -73,7 +73,7 @@ export default class App {
     return await prompt.run();
   }
 
-  #getFirstLine(memo) {
+  #getFirstLineLength(memo) {
     return memo.indexOf("\n") === -1 ? memo.length : memo.indexOf("\n");
   }
 }
