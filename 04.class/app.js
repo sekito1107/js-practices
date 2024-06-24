@@ -32,7 +32,7 @@ export default class App {
     });
     await new Promise((resolve) => process.stdin.on("end", resolve));
     if (content === "") return;
-    this.db.insert(content.trim());
+    this.storage.insert(content.trim());
   }
 
   async #showList() {
