@@ -20,6 +20,8 @@ export default class App {
       this.#showMemo();
     } else if (this.options.length === 1 && this.options[0] === "-d") {
       this.#handleDelete();
+    } else {
+      console.log("引数が不正です");
     }
   }
 
