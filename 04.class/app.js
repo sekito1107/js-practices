@@ -4,12 +4,12 @@ import Database from "./database.js";
 
 export default class App {
   constructor() {
-    this.db = new Database("./memo.sqlite3");
+    this.storage = new Database("./memo.sqlite3");
     this.options = process.argv.slice(2);
   }
 
   async run() {
-    await this.db.createTable();
+    await this.storage.createTable();
 
     if (this.options.length === 0) {
       console.log("メモを入力してください");
@@ -36,7 +36,7 @@ export default class App {
   }
 
   async #showList() {
-    const memos = await this.db.getAll();
+    const memos = await this.storage.getAll();
     memos.forEach((memo) => {
       const firstLineLength = this.#getFirstLineLength(memo.content);
       console.log(memo.content.substring(0, firstLineLength));
@@ -46,18 +46,18 @@ export default class App {
   async #showMemo() {
     const targetId =
       await this.#getTargetMemoId("表示したいメモを選んでください");
-    const memo = await this.db.fetch(targetId);
+    const memo = await this.storage.fetch(targetId);
     console.log(memo.content);
   }
 
   async #handleDelete() {
     const targetId =
       await this.#getTargetMemoId("削除したいメモを選んでください");
-    this.db.delete(targetId);
+    this.storage.delete(targetId);
   }
 
   async #getTargetMemoId(message) {
-    const memos = await this.db.getAll();
+    const memos = await this.storage.getAll();
     const choices = memos.map((memo) => {
       const firstLineLength = this.#getFirstLineLength(memo.content);
       return {
